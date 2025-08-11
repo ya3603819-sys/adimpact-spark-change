@@ -1,8 +1,19 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
-import { PlusCircle, Users, TrendingUp, Zap, Heart, MessageCircle, Eye } from 'lucide-react';
+import { 
+  PlusCircle, 
+  Users, 
+  TrendingUp, 
+  Zap, 
+  Heart, 
+  MessageCircle, 
+  Eye, 
+  BarChart3,
+  Target,
+  Rocket
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -50,170 +61,235 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 floating-particles">
       {/* Hero Section */}
-      <section className="relative overflow-hidden hero-gradient">
-        <div className="absolute inset-0">
-          {/* Subtle animated background */}
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl"></div>
-        </div>
-        
-        <div className="container relative z-10 mx-auto px-4 py-24 text-center">
-          <div className="mx-auto max-w-4xl">
-            {/* Logo */}
-            <div className="mb-8 flex justify-center">
-              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-2xl">
-                <span className="text-3xl font-bold text-white">AI</span>
-              </div>
+      <section className="relative py-20 px-4 text-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-brand-accent/5 morphing-blob"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-primary/20 to-brand-secondary/20 rounded-full blur-xl"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-r from-brand-accent/20 to-primary/20 rounded-full blur-xl"></div>
+        <div className="relative z-10 container mx-auto max-w-4xl">
+          <h1 className="text-6xl md:text-8xl font-bold mb-8 font-amiri">
+            <span className="gradient-text-dynamic neon-glow">منصة الإعلانات</span>
+            <br />
+            <span className="text-foreground gradient-text block mt-4">المؤثرة 🚀</span>
+          </h1>
+          <p className="text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed font-cairo">
+            ✨ اكتشف قوة الإعلانات الاجتماعية التي تحدث تأثيراً حقيقياً في المجتمع 
+            <br />
+            🌟 انضم لمجتمع من المبدعين والمؤثرين لنشر رسائل إيجابية ومعنوية
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+            <Button asChild size="lg" className="btn-glow text-xl px-12 py-4 font-cairo font-semibold">
+              <Link to="/create">🎨 ابدأ الإبداع الآن</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-xl px-12 py-4 glass-effect hover:glass-card font-cairo font-semibold">
+              <Link to="/ads">🌟 استكشف الإعلانات</Link>
+            </Button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+            <div className="glass-card p-6 rounded-2xl card-hover">
+              <div className="text-4xl mb-4">🎯</div>
+              <h3 className="font-bold text-lg mb-2 gradient-text">هدف واضح</h3>
+              <p className="text-muted-foreground">رسائل مؤثرة تصل للقلوب</p>
             </div>
-            
-            {/* Main Title */}
-            <h1 className="mb-6 text-6xl font-bold text-white md:text-8xl tracking-tight">
-              AdImpact
-            </h1>
-            
-            {/* Subtitle with gradient */}
-            <div className="mb-4">
-              <span className="text-2xl font-semibold text-blue-200 md:text-4xl">Design for Change</span>
-              <span className="text-2xl font-semibold text-white md:text-4xl"> – </span>
-              <span className="text-2xl font-semibold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent md:text-4xl">قوة الإعلان</span>
+            <div className="glass-card p-6 rounded-2xl card-hover">
+              <div className="text-4xl mb-4">🤝</div>
+              <h3 className="font-bold text-lg mb-2 gradient-text">مجتمع فعال</h3>
+              <p className="text-muted-foreground">تفاعل وتشارك مع المبدعين</p>
             </div>
-            
-            {/* Description */}
-            <p className="mb-12 text-lg text-blue-100 md:text-xl max-w-3xl mx-auto leading-relaxed">
-              منصة تفاعلية مدعومة بالذكاء الاصطناعي لإنشاء إعلانات هادفة وقياس تأثيرها الإيجابي في المجتمع
-            </p>
-            
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              {user ? (
-                <>
-                  <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 btn-glow">
-                    <Link to="/create" className="flex items-center space-x-3">
-                      <PlusCircle className="h-6 w-6" />
-                      <span>إنشاء إعلان جديد</span>
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="lg" className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm font-semibold px-8 py-4 text-lg">
-                    <Link to="/ads" className="flex items-center space-x-3">
-                      <Users className="h-6 w-6" />
-                      <span>استكشف الإعلانات</span>
-                    </Link>
-                  </Button>
-                </>
-              ) : (
-                <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 btn-glow">
-                  <Link to="/auth">ابدأ رحلتك الآن</Link>
-                </Button>
-              )}
+            <div className="glass-card p-6 rounded-2xl card-hover">
+              <div className="text-4xl mb-4">📈</div>
+              <h3 className="font-bold text-lg mb-2 gradient-text">تأثير حقيقي</h3>
+              <p className="text-muted-foreground">قياس نتائج ملموسة</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center tech-card p-6 rounded-2xl card-hover">
-              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
-                <Zap className="h-8 w-8 text-white" />
-              </div>
-              <p className="text-3xl font-bold text-gray-900 mb-2">{stats.total_ads}</p>
-              <p className="text-sm font-medium text-gray-600">إعلان منشور</p>
-            </div>
-            
-            <div className="text-center tech-card p-6 rounded-2xl card-hover">
-              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg">
-                <Heart className="h-8 w-8 text-white" />
-              </div>
-              <p className="text-3xl font-bold text-gray-900 mb-2">{stats.total_likes}</p>
-              <p className="text-sm font-medium text-gray-600">إعجاب</p>
-            </div>
-            
-            <div className="text-center tech-card p-6 rounded-2xl card-hover">
-              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg">
-                <MessageCircle className="h-8 w-8 text-white" />
-              </div>
-              <p className="text-3xl font-bold text-gray-900 mb-2">{stats.total_comments}</p>
-              <p className="text-sm font-medium text-gray-600">تعليق</p>
-            </div>
-            
-            <div className="text-center tech-card p-6 rounded-2xl card-hover">
-              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg">
-                <Eye className="h-8 w-8 text-white" />
-              </div>
-              <p className="text-3xl font-bold text-gray-900 mb-2">{stats.total_views}</p>
-              <p className="text-sm font-medium text-gray-600">مشاهدة</p>
-            </div>
+      <section className="py-20 px-4 relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-brand-secondary/5 to-brand-accent/5"></div>
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <h2 className="text-4xl font-bold text-center mb-12 gradient-text-dynamic font-amiri">
+            📊 إحصائيات مذهلة
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <Card className="text-center tech-card card-hover">
+              <CardContent className="p-8">
+                <div className="text-5xl mb-4">🎯</div>
+                <div className="text-4xl font-bold gradient-text mb-3 font-cairo">{stats.total_ads}</div>
+                <div className="text-muted-foreground font-semibold">إعلان مؤثر</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center tech-card card-hover">
+              <CardContent className="p-8">
+                <div className="text-5xl mb-4">👥</div>
+                <div className="text-4xl font-bold gradient-text mb-3 font-cairo">{stats.total_likes}</div>
+                <div className="text-muted-foreground font-semibold">إعجاب</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center tech-card card-hover">
+              <CardContent className="p-8">
+                <div className="text-5xl mb-4">❤️</div>
+                <div className="text-4xl font-bold gradient-text mb-3 font-cairo">{stats.total_comments}</div>
+                <div className="text-muted-foreground font-semibold">تعليق</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center tech-card card-hover">
+              <CardContent className="p-8">
+                <div className="text-5xl mb-4">👁️</div>
+                <div className="text-4xl font-bold gradient-text mb-3 font-cairo">{stats.total_views}</div>
+                <div className="text-muted-foreground font-semibold">مشاهدة</div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6">
-              <span className="gradient-text">لماذا AdImpact؟</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              نوفر لك أحدث التقنيات والإمكانيات لإنشاء إعلانات مؤثرة تحدث فرقاً حقيقياً في المجتمع
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-10">
-            <div className="text-center tech-card p-8 rounded-3xl card-hover">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-xl">
-                <PlusCircle className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">إنشاء سهل وذكي</h3>
-              <p className="text-gray-600 leading-relaxed">
-                قوالب تصميم مدعومة بالذكاء الاصطناعي وأدوات بسيطة لإنشاء إعلانات احترافية في دقائق
-              </p>
-            </div>
-            
-            <div className="text-center tech-card p-8 rounded-3xl card-hover">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-xl">
-                <Users className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">تفاعل فوري</h3>
-              <p className="text-gray-600 leading-relaxed">
-                شارك مع المجتمع في الوقت الفعلي واحصل على ردود فعل فورية وتحليلات ذكية
-              </p>
-            </div>
-            
-            <div className="text-center tech-card p-8 rounded-3xl card-hover">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shadow-xl">
-                <TrendingUp className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">تأثير قابل للقياس</h3>
-              <p className="text-gray-600 leading-relaxed">
-                تابع أداء إعلاناتك بتحليلات متقدمة وقس تأثيرها الحقيقي على الجمهور
-              </p>
-            </div>
+      <section className="py-24 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/5 via-transparent to-brand-secondary/5"></div>
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <h2 className="text-5xl font-bold text-center mb-16 gradient-text-dynamic font-amiri">
+            🌟 ميزات المنصة الساحرة
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <Card className="card-hover tech-card relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary/20 to-transparent rounded-bl-full"></div>
+              <CardHeader>
+                <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                  <Zap className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-2xl gradient-text font-cairo">⚡ إنشاء سريع</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  أدوات بسيطة وقوية لإنشاء إعلانات مؤثرة في دقائق معدودة مع قوالب احترافية
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="card-hover tech-card relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-brand-secondary/20 to-transparent rounded-bl-full"></div>
+              <CardHeader>
+                <div className="w-16 h-16 bg-gradient-to-br from-brand-secondary/20 to-brand-secondary/10 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                  <Users className="h-8 w-8 text-brand-secondary" />
+                </div>
+                <CardTitle className="text-2xl gradient-text font-cairo">🤝 مجتمع تفاعلي</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  تفاعل مع المبدعين الآخرين وشاركهم التعليقات والإعجابات في بيئة إيجابية
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="card-hover tech-card relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-brand-accent/20 to-transparent rounded-bl-full"></div>
+              <CardHeader>
+                <div className="w-16 h-16 bg-gradient-to-br from-brand-accent/20 to-brand-accent/10 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                  <BarChart3 className="h-8 w-8 text-brand-accent" />
+                </div>
+                <CardTitle className="text-2xl gradient-text font-cairo">📊 تحليلات متقدمة</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  اعرف مدى تأثير إعلاناتك من خلال إحصائيات مفصلة ودقيقة وتقارير شاملة
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="card-hover tech-card relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-brand-success/20 to-transparent rounded-bl-full"></div>
+              <CardHeader>
+                <div className="w-16 h-16 bg-gradient-to-br from-brand-success/20 to-brand-success/10 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                  <Target className="h-8 w-8 text-brand-success" />
+                </div>
+                <CardTitle className="text-2xl gradient-text font-cairo">🎯 استهداف ذكي</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  وصل لجمهورك المناسب من خلال خوارزميات ذكية للاستهداف والانتشار
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="card-hover tech-card relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary/20 to-transparent rounded-bl-full"></div>
+              <CardHeader>
+                <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                  <Heart className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-2xl gradient-text font-cairo">💖 تأثير إيجابي</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  شارك في نشر المحتوى الإيجابي والرسائل التي تبني المجتمع وتنشر الخير
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="card-hover tech-card relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-brand-secondary/20 to-transparent rounded-bl-full"></div>
+              <CardHeader>
+                <div className="w-16 h-16 bg-gradient-to-br from-brand-secondary/20 to-brand-secondary/10 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                  <Rocket className="h-8 w-8 text-brand-secondary" />
+                </div>
+                <CardTitle className="text-2xl gradient-text font-cairo">🚀 نمو مستمر</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  ميزات جديدة وأدوات متطورة تضاف باستمرار لتحسين تجربتك الإبداعية
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      {!user && (
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-white mb-6">
-              جاهز لتبدأ في إحداث التغيير؟
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              انضم إلى مجتمع المبدعين واستخدم قوة الإعلان والتكنولوجيا لبناء عالم أفضل
-            </p>
-            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-blue-50 shadow-lg hover:shadow-xl transition-all duration-200">
-              <Link to="/auth">إنشاء حساب مجاني</Link>
+      <section className="py-24 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-brand-accent/10 to-brand-secondary/10"></div>
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-brand-accent/10 rounded-full blur-3xl"></div>
+        </div>
+        <div className="container mx-auto max-w-5xl text-center relative z-10">
+          <h2 className="text-6xl font-bold mb-8 gradient-text-dynamic font-amiri neon-glow">
+            🌟 ابدأ رحلتك الإبداعية اليوم
+          </h2>
+          <p className="text-2xl text-muted-foreground mb-12 font-cairo leading-relaxed">
+            ✨ انضم لآلاف المبدعين الذين يصنعون التغيير الإيجابي في المجتمع 
+            <br />
+            🚀 واترك بصمتك في عالم الإعلانات المؤثرة
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+            <Button asChild size="lg" className="btn-glow text-xl px-12 py-4 font-cairo font-bold">
+              <Link to="/auth">🎯 انشئ حساباً مجانياً</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-xl px-12 py-4 glass-effect hover:glass-card font-cairo font-bold">
+              <Link to="/leaderboard">🏆 شاهد المتصدرين</Link>
             </Button>
           </div>
-        </section>
-      )}
+          <div className="glass-card p-8 rounded-3xl max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold gradient-text mb-4 font-cairo">💎 ميزات حصرية للأعضاء</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div>
+                <div className="text-3xl mb-2">🎨</div>
+                <div className="font-semibold">قوالب احترافية</div>
+              </div>
+              <div>
+                <div className="text-3xl mb-2">📱</div>
+                <div className="font-semibold">مشاركة فورية</div>
+              </div>
+              <div>
+                <div className="text-3xl mb-2">🏅</div>
+                <div className="font-semibold">نظام نقاط</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
