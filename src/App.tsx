@@ -10,6 +10,7 @@ import Auth from "./pages/Auth";
 import Create from "./pages/Create";
 import Ads from "./pages/Ads";
 import Leaderboard from "./pages/Leaderboard";
+import ImageMaker from "./pages/ImageMaker";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/create" element={<Create />} />
             <Route path="/ads" element={<Ads />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/image-maker" element={<ImageMaker />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

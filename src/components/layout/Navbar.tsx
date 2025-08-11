@@ -11,7 +11,8 @@ import {
   Eye,
   ChevronDown,
   Settings,
-  HelpCircle
+  HelpCircle,
+  ImageIcon
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -86,6 +87,18 @@ export function Navbar() {
               <Trophy className="h-4 w-4 group-hover:scale-110 transition-transform" />
               <span>🏆 المتصدرون</span>
               <Badge variant="secondary" className="ml-2 animate-pulse">جديد</Badge>
+            </Link>
+          </Button>
+
+          <Button
+            variant="ghost"
+            size="sm"
+            asChild
+            className="text-muted-foreground hover:text-purple-400 hover:bg-purple-400/10 transition-all duration-300 rounded-xl font-cairo group relative"
+          >
+            <Link to="/image-maker" className="flex items-center space-x-2">
+              <ImageIcon className="h-4 w-4 group-hover:scale-110 transition-transform" />
+              <span>🎨 مولد الصور</span>
             </Link>
           </Button>
 
@@ -205,6 +218,14 @@ export function Navbar() {
           >
             <Trophy className="h-4 w-4" />
             <span>المتصدرون</span>
+          </Link>
+          
+          <Link 
+            to="/image-maker" 
+            className="flex flex-col items-center space-y-1 text-xs font-cairo text-muted-foreground hover:text-purple-400 transition-colors"
+          >
+            <ImageIcon className="h-4 w-4" />
+            <span>مولد الصور</span>
           </Link>
           
           {user && (
