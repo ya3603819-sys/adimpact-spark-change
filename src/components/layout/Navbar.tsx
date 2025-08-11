@@ -20,13 +20,13 @@ export function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-blue-200/40 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-sm">
+    <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur-sm supports-[backdrop-filter]:bg-white/90 shadow-sm">
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
+        <Link to="/" className="flex items-center space-x-3">
+          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
             <span className="text-sm font-bold text-white">AI</span>
           </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">AdImpact</span>
+          <span className="text-xl font-bold gradient-text">AdImpact</span>
         </Link>
 
         <div className="flex items-center space-x-4">
@@ -36,7 +36,7 @@ export function Navbar() {
               variant="ghost"
               size="sm"
               asChild
-              className="text-slate-600 hover:text-blue-600 hover:bg-blue-50"
+              className="text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors"
             >
               <Link to="/create" className="flex items-center space-x-2">
                 <PlusCircle className="h-4 w-4" />
@@ -48,7 +48,7 @@ export function Navbar() {
               variant="ghost"
               size="sm"
               asChild
-              className="text-slate-600 hover:text-blue-600 hover:bg-blue-50"
+              className="text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors"
             >
               <Link to="/leaderboard" className="flex items-center space-x-2">
                 <Trophy className="h-4 w-4" />
@@ -75,7 +75,7 @@ export function Navbar() {
               </DropdownMenu>
             </>
           ) : (
-            <Button asChild variant="default" size="sm" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-md">
+            <Button asChild variant="default" size="sm" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-md hover:shadow-lg transition-all">
               <Link to="/auth">تسجيل الدخول</Link>
             </Button>
           )}

@@ -50,48 +50,61 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-        <div className="absolute inset-0 bg-black/20"></div>
-        {/* Animated background elements */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      <section className="relative overflow-hidden hero-gradient">
+        <div className="absolute inset-0">
+          {/* Subtle animated background */}
+          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl"></div>
+        </div>
         
         <div className="container relative z-10 mx-auto px-4 py-24 text-center">
           <div className="mx-auto max-w-4xl">
-            <div className="mb-6 flex justify-center">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center shadow-2xl">
+            {/* Logo */}
+            <div className="mb-8 flex justify-center">
+              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-2xl">
                 <span className="text-3xl font-bold text-white">AI</span>
               </div>
             </div>
-            <h1 className="mb-6 text-5xl font-bold text-white md:text-7xl">
+            
+            {/* Main Title */}
+            <h1 className="mb-6 text-6xl font-bold text-white md:text-8xl tracking-tight">
               AdImpact
             </h1>
-            <p className="mb-4 text-2xl font-semibold text-blue-200 md:text-3xl">
-              Design for Change – قوة الإعلان
+            
+            {/* Subtitle with gradient */}
+            <div className="mb-4">
+              <span className="text-2xl font-semibold text-blue-200 md:text-4xl">Design for Change</span>
+              <span className="text-2xl font-semibold text-white md:text-4xl"> – </span>
+              <span className="text-2xl font-semibold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent md:text-4xl">قوة الإعلان</span>
+            </div>
+            
+            {/* Description */}
+            <p className="mb-12 text-lg text-blue-100 md:text-xl max-w-3xl mx-auto leading-relaxed">
+              منصة تفاعلية مدعومة بالذكاء الاصطناعي لإنشاء إعلانات هادفة وقياس تأثيرها الإيجابي في المجتمع
             </p>
-            <p className="mb-8 text-lg text-blue-100 md:text-xl max-w-2xl mx-auto">
-              منصة تفاعلية مدعومة بالذكاء الاصطناعي لإنشاء إعلانات هادفة وتحليل تأثيرها الإيجابي في المجتمع. 
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               {user ? (
                 <>
-                  <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-200">
-                    <Link to="/create" className="flex items-center space-x-2">
-                      <PlusCircle className="h-5 w-5" />
+                  <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 btn-glow">
+                    <Link to="/create" className="flex items-center space-x-3">
+                      <PlusCircle className="h-6 w-6" />
                       <span>إنشاء إعلان جديد</span>
                     </Link>
                   </Button>
-                  <Button asChild variant="outline" size="lg" className="border-blue-300 text-blue-100 hover:bg-blue-500/20 backdrop-blur-sm">
-                    <Link to="/ads" className="flex items-center space-x-2">
-                      <Users className="h-5 w-5" />
+                  <Button asChild variant="outline" size="lg" className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm font-semibold px-8 py-4 text-lg">
+                    <Link to="/ads" className="flex items-center space-x-3">
+                      <Users className="h-6 w-6" />
                       <span>استكشف الإعلانات</span>
                     </Link>
                   </Button>
                 </>
               ) : (
-                <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-200">
+                <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 btn-glow">
                   <Link to="/auth">ابدأ رحلتك الآن</Link>
                 </Button>
               )}
@@ -101,98 +114,86 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-background">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <Card className="text-center card-hover">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-lg bg-brand-primary/10">
-                  <Zap className="h-6 w-6 text-brand-primary" />
-                </div>
-                <p className="text-2xl font-bold">{stats.total_ads}</p>
-                <p className="text-sm text-muted-foreground">إعلان منشور</p>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center tech-card p-6 rounded-2xl card-hover">
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
+                <Zap className="h-8 w-8 text-white" />
+              </div>
+              <p className="text-3xl font-bold text-gray-900 mb-2">{stats.total_ads}</p>
+              <p className="text-sm font-medium text-gray-600">إعلان منشور</p>
+            </div>
             
-            <Card className="text-center card-hover">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-lg bg-brand-secondary/10">
-                  <Heart className="h-6 w-6 text-brand-secondary" />
-                </div>
-                <p className="text-2xl font-bold">{stats.total_likes}</p>
-                <p className="text-sm text-muted-foreground">إعجاب</p>
-              </CardContent>
-            </Card>
+            <div className="text-center tech-card p-6 rounded-2xl card-hover">
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg">
+                <Heart className="h-8 w-8 text-white" />
+              </div>
+              <p className="text-3xl font-bold text-gray-900 mb-2">{stats.total_likes}</p>
+              <p className="text-sm font-medium text-gray-600">إعجاب</p>
+            </div>
             
-            <Card className="text-center card-hover">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-lg bg-brand-accent/10">
-                  <MessageCircle className="h-6 w-6 text-brand-accent" />
-                </div>
-                <p className="text-2xl font-bold">{stats.total_comments}</p>
-                <p className="text-sm text-muted-foreground">تعليق</p>
-              </CardContent>
-            </Card>
+            <div className="text-center tech-card p-6 rounded-2xl card-hover">
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg">
+                <MessageCircle className="h-8 w-8 text-white" />
+              </div>
+              <p className="text-3xl font-bold text-gray-900 mb-2">{stats.total_comments}</p>
+              <p className="text-sm font-medium text-gray-600">تعليق</p>
+            </div>
             
-            <Card className="text-center card-hover">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-lg bg-brand-success/10">
-                  <Eye className="h-6 w-6 text-brand-success" />
-                </div>
-                <p className="text-2xl font-bold">{stats.total_views}</p>
-                <p className="text-sm text-muted-foreground">مشاهدة</p>
-              </CardContent>
-            </Card>
+            <div className="text-center tech-card p-6 rounded-2xl card-hover">
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-green-500 to-green-600 shadow-lg">
+                <Eye className="h-8 w-8 text-white" />
+              </div>
+              <p className="text-3xl font-bold text-gray-900 mb-2">{stats.total_views}</p>
+              <p className="text-sm font-medium text-gray-600">مشاهدة</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 gradient-text">لماذا AdImpact؟</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              نوفر لك الأدوات والإمكانيات لإنشاء إعلانات مؤثرة تحدث فرقاً حقيقياً
+            <h2 className="text-4xl font-bold mb-6">
+              <span className="gradient-text">لماذا AdImpact؟</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              نوفر لك أحدث التقنيات والإمكانيات لإنشاء إعلانات مؤثرة تحدث فرقاً حقيقياً في المجتمع
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center card-hover">
-              <CardContent className="pt-8">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-primary flex items-center justify-center">
-                  <PlusCircle className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">إنشاء سهل</h3>
-                <p className="text-muted-foreground">
-                  قوالب تصميم جاهزة وأدوات بسيطة لإنشاء إعلانات احترافية في دقائق
-                </p>
-              </CardContent>
-            </Card>
+          <div className="grid md:grid-cols-3 gap-10">
+            <div className="text-center tech-card p-8 rounded-3xl card-hover">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-xl">
+                <PlusCircle className="h-10 w-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">إنشاء سهل وذكي</h3>
+              <p className="text-gray-600 leading-relaxed">
+                قوالب تصميم مدعومة بالذكاء الاصطناعي وأدوات بسيطة لإنشاء إعلانات احترافية في دقائق
+              </p>
+            </div>
             
-            <Card className="text-center card-hover">
-              <CardContent className="pt-8">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-primary flex items-center justify-center">
-                  <Users className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">تفاعل فوري</h3>
-                <p className="text-muted-foreground">
-                  شارك مع المجتمع في الوقت الفعلي واحصل على ردود فعل فورية
-                </p>
-              </CardContent>
-            </Card>
+            <div className="text-center tech-card p-8 rounded-3xl card-hover">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-xl">
+                <Users className="h-10 w-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">تفاعل فوري</h3>
+              <p className="text-gray-600 leading-relaxed">
+                شارك مع المجتمع في الوقت الفعلي واحصل على ردود فعل فورية وتحليلات ذكية
+              </p>
+            </div>
             
-            <Card className="text-center card-hover">
-              <CardContent className="pt-8">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-primary flex items-center justify-center">
-                  <TrendingUp className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">تأثير قابل للقياس</h3>
-                <p className="text-muted-foreground">
-                  تابع أداء إعلاناتك وقس تأثيرها الحقيقي على الجمهور
-                </p>
-              </CardContent>
-            </Card>
+            <div className="text-center tech-card p-8 rounded-3xl card-hover">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shadow-xl">
+                <TrendingUp className="h-10 w-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">تأثير قابل للقياس</h3>
+              <p className="text-gray-600 leading-relaxed">
+                تابع أداء إعلاناتك بتحليلات متقدمة وقس تأثيرها الحقيقي على الجمهور
+              </p>
+            </div>
           </div>
         </div>
       </section>
