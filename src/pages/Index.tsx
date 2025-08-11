@@ -52,30 +52,38 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-hero">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
         <div className="absolute inset-0 bg-black/20"></div>
+        {/* Animated background elements */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        
         <div className="container relative z-10 mx-auto px-4 py-24 text-center">
           <div className="mx-auto max-w-4xl">
+            <div className="mb-6 flex justify-center">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center shadow-2xl">
+                <span className="text-3xl font-bold text-white">AI</span>
+              </div>
+            </div>
             <h1 className="mb-6 text-5xl font-bold text-white md:text-7xl">
               AdImpact
             </h1>
-            <p className="mb-4 text-2xl font-semibold text-white/90 md:text-3xl">
+            <p className="mb-4 text-2xl font-semibold text-blue-200 md:text-3xl">
               Design for Change – قوة الإعلان
             </p>
-            <p className="mb-8 text-lg text-white/80 md:text-xl max-w-2xl mx-auto">
-              منصة تفاعلية تسخر قوة الإعلان والتصميم لإحداث تغيير إيجابي في المجتمع. 
-              أنشئ إعلانات هادفة وشارك في بناء مستقبل أفضل.
+            <p className="mb-8 text-lg text-blue-100 md:text-xl max-w-2xl mx-auto">
+              منصة تفاعلية مدعومة بالذكاء الاصطناعي لإنشاء إعلانات هادفة وتحليل تأثيرها الإيجابي في المجتمع. 
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               {user ? (
                 <>
-                  <Button asChild size="lg" className="btn-glow bg-white text-brand-primary hover:bg-white/90">
+                  <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-200">
                     <Link to="/create" className="flex items-center space-x-2">
                       <PlusCircle className="h-5 w-5" />
                       <span>إنشاء إعلان جديد</span>
                     </Link>
                   </Button>
-                  <Button asChild variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
+                  <Button asChild variant="outline" size="lg" className="border-blue-300 text-blue-100 hover:bg-blue-500/20 backdrop-blur-sm">
                     <Link to="/ads" className="flex items-center space-x-2">
                       <Users className="h-5 w-5" />
                       <span>استكشف الإعلانات</span>
@@ -83,17 +91,13 @@ const Index = () => {
                   </Button>
                 </>
               ) : (
-                <Button asChild size="lg" className="btn-glow bg-white text-brand-primary hover:bg-white/90">
+                <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-200">
                   <Link to="/auth">ابدأ رحلتك الآن</Link>
                 </Button>
               )}
             </div>
           </div>
         </div>
-        
-        {/* Animated background elements */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-brand-accent/20 rounded-full blur-3xl animate-pulse-glow"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-brand-secondary/20 rounded-full blur-3xl animate-pulse-glow delay-1000"></div>
       </section>
 
       {/* Stats Section */}
@@ -195,15 +199,15 @@ const Index = () => {
 
       {/* CTA Section */}
       {!user && (
-        <section className="py-20 bg-gradient-primary">
+        <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold text-white mb-6">
               جاهز لتبدأ في إحداث التغيير؟
             </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              انضم إلى مجتمع المبدعين واستخدم قوة الإعلان لبناء عالم أفضل
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              انضم إلى مجتمع المبدعين واستخدم قوة الإعلان والتكنولوجيا لبناء عالم أفضل
             </p>
-            <Button asChild size="lg" className="btn-glow bg-white text-brand-primary hover:bg-white/90">
+            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-blue-50 shadow-lg hover:shadow-xl transition-all duration-200">
               <Link to="/auth">إنشاء حساب مجاني</Link>
             </Button>
           </div>
