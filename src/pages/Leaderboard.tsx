@@ -13,10 +13,10 @@ interface LeaderboardAd {
   comments_count: number;
   views_count: number;
   created_at: string;
-  profiles: {
+  profiles?: {
     full_name: string;
     username: string;
-  };
+  } | null;
 }
 
 interface TopCreator {
@@ -53,51 +53,60 @@ export default function Leaderboard() {
       const [likesData, commentsData, viewsData] = await Promise.all([
         supabase
           .from('ads')
-          .select(`
-            id, title, likes_count, comments_count, views_count, created_at,
-            profiles (full_name, username)
-          `)
+          .select('id, title, likes_count, comments_count, views_count, created_at, user_id')
           .eq('status', 'published')
           .order('likes_count', { ascending: false })
           .limit(10),
         
         supabase
           .from('ads')
-          .select(`
-            id, title, likes_count, comments_count, views_count, created_at,
-            profiles (full_name, username)
-          `)
+          .select('id, title, likes_count, comments_count, views_count, created_at, user_id')
           .eq('status', 'published')
           .order('comments_count', { ascending: false })
           .limit(10),
           
         supabase
           .from('ads')
-          .select(`
-            id, title, likes_count, comments_count, views_count, created_at,
-            profiles (full_name, username)
-          `)
+          .select('id, title, likes_count, comments_count, views_count, created_at, user_id')
           .eq('status', 'published')
           .order('views_count', { ascending: false })
           .limit(10)
       ]);
 
+      // Get all unique user IDs
+      const allUserIds = new Set([
+        ...(likesData.data?.map(ad => ad.user_id) || []),
+        ...(commentsData.data?.map(ad => ad.user_id) || []),
+        ...(viewsData.data?.map(ad => ad.user_id) || [])
+      ]);
+
+      // Fetch profiles for all users
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('profiles')
+        .select('user_id, full_name, username')
+        .in('user_id', Array.from(allUserIds));
+
+      if (profilesError) throw profilesError;
+
+      const profileMap = new Map(profilesData?.map(p => [p.user_id, p]) || []);
+
+      // Add profiles to ads
+      const addProfilesToAds = (ads: any[]) => 
+        ads.map(ad => ({
+          ...ad,
+          profiles: profileMap.get(ad.user_id) || null
+        }));
+
       setTopAds({
-        likes: likesData.data || [],
-        comments: commentsData.data || [],
-        views: viewsData.data || []
+        likes: addProfilesToAds(likesData.data || []),
+        comments: addProfilesToAds(commentsData.data || []),
+        views: addProfilesToAds(viewsData.data || [])
       });
 
       // Fetch top creators (aggregated data)
       const { data: creatorsData, error: creatorsError } = await supabase
         .from('ads')
-        .select(`
-          user_id,
-          likes_count,
-          comments_count,
-          views_count,
-          profiles (full_name, username)
-        `)
+        .select('user_id, likes_count, comments_count, views_count')
         .eq('status', 'published');
 
       if (creatorsError) throw creatorsError;
@@ -107,11 +116,13 @@ export default function Leaderboard() {
       
       creatorsData?.forEach(ad => {
         const userId = ad.user_id;
+        const profile = profileMap.get(userId);
+        
         if (!creatorStats.has(userId)) {
           creatorStats.set(userId, {
             user_id: userId,
-            full_name: ad.profiles?.full_name || 'مستخدم',
-            username: ad.profiles?.username || '',
+            full_name: profile?.full_name || 'مستخدم',
+            username: profile?.username || '',
             total_ads: 0,
             total_likes: 0,
             total_comments: 0,

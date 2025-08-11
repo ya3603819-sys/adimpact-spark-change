@@ -30,10 +30,10 @@ interface Comment {
   id: string;
   content: string;
   created_at: string;
-  profiles: {
+  profiles?: {
     full_name: string;
     username: string;
-  };
+  } | null;
 }
 
 export default function Ads() {
@@ -81,20 +81,31 @@ export default function Ads() {
 
   const fetchAds = async () => {
     try {
-      const { data, error } = await supabase
+      const { data: adsData, error: adsError } = await supabase
         .from('ads')
-        .select(`
-          *,
-          profiles (
-            full_name,
-            username
-          )
-        `)
+        .select('*')
         .eq('status', 'published')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setAds(data || []);
+      if (adsError) throw adsError;
+
+      // Fetch profiles separately
+      const userIds = [...new Set(adsData?.map(ad => ad.user_id) || [])];
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('profiles')
+        .select('user_id, full_name, username')
+        .in('user_id', userIds);
+
+      if (profilesError) throw profilesError;
+
+      // Match profiles to ads
+      const profileMap = new Map(profilesData?.map(p => [p.user_id, p]) || []);
+      const adsWithProfiles = adsData?.map(ad => ({
+        ...ad,
+        profiles: profileMap.get(ad.user_id) || null
+      })) || [];
+
+      setAds(adsWithProfiles);
     } catch (error: any) {
       toast({
         title: "خطأ في تحميل الإعلانات",
@@ -123,20 +134,31 @@ export default function Ads() {
 
   const fetchComments = async (adId: string) => {
     try {
-      const { data, error } = await supabase
+      const { data: commentsData, error: commentsError } = await supabase
         .from('comments')
-        .select(`
-          *,
-          profiles (
-            full_name,
-            username
-          )
-        `)
+        .select('*')
         .eq('ad_id', adId)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setComments(prev => ({ ...prev, [adId]: data || [] }));
+      if (commentsError) throw commentsError;
+
+      // Fetch profiles for comments
+      const userIds = [...new Set(commentsData?.map(comment => comment.user_id) || [])];
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('profiles')
+        .select('user_id, full_name, username')
+        .in('user_id', userIds);
+
+      if (profilesError) throw profilesError;
+
+      // Match profiles to comments
+      const profileMap = new Map(profilesData?.map(p => [p.user_id, p]) || []);
+      const commentsWithProfiles = commentsData?.map(comment => ({
+        ...comment,
+        profiles: profileMap.get(comment.user_id) || null
+      })) || [];
+
+      setComments(prev => ({ ...prev, [adId]: commentsWithProfiles }));
     } catch (error: any) {
       toast({
         title: "خطأ في تحميل التعليقات",
