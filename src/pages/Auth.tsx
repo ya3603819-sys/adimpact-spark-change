@@ -80,39 +80,43 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4">
-      <Card className="w-full max-w-md bg-white/95 backdrop-blur-md border border-blue-200/50 shadow-2xl">
-        <CardHeader className="text-center">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
-            <span className="text-2xl font-bold text-white">AI</span>
-          </div>
-          <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-            مرحباً بك في AdImpact
-          </CardTitle>
-          <CardDescription className="text-slate-600">
-            منصة الإعلانات التفاعلية المدعومة بالتكنولوجيا
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-slate-100">
-              <TabsTrigger 
-                value="signin" 
-                className="data-[state=active]:bg-blue-500 data-[state=active]:text-white text-slate-700"
-              >
-                تسجيل الدخول
-              </TabsTrigger>
-              <TabsTrigger 
-                value="signup" 
-                className="data-[state=active]:bg-blue-500 data-[state=active]:text-white text-slate-700"
-              >
-                إنشاء حساب
-              </TabsTrigger>
-            </TabsList>
+      <div className="w-full max-w-md">
+        <Card className="bg-white/95 backdrop-blur-md border border-gray-200 shadow-2xl rounded-2xl overflow-hidden">
+          <CardHeader className="text-center py-8">
+            {/* Logo */}
+            <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-xl">
+              <span className="text-2xl font-bold text-white">AI</span>
+            </div>
             
-            <TabsContent value="signin">
-              <form onSubmit={handleSignIn} className="space-y-4">
+            <CardTitle className="text-3xl font-bold gradient-text mb-2">
+              مرحباً بك في AdImpact
+            </CardTitle>
+            <CardDescription className="text-gray-600 text-lg">
+              منصة الإعلانات التفاعلية المدعومة بالتكنولوجيا
+            </CardDescription>
+          </CardHeader>
+          
+          <CardContent className="px-8 pb-8">
+            <Tabs defaultValue="signin" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 bg-gray-100 p-1 rounded-xl">
+                <TabsTrigger 
+                  value="signin" 
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-600 data-[state=active]:text-white text-gray-700 font-medium rounded-lg py-2.5 transition-all"
+                >
+                  تسجيل الدخول
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="signup" 
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-600 data-[state=active]:text-white text-gray-700 font-medium rounded-lg py-2.5 transition-all"
+                >
+                  إنشاء حساب
+                </TabsTrigger>
+              </TabsList>
+            
+            <TabsContent value="signin" className="mt-6">
+              <form onSubmit={handleSignIn} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-slate-700 font-medium">البريد الإلكتروني</Label>
+                  <Label htmlFor="email" className="text-gray-700 font-semibold text-sm">البريد الإلكتروني</Label>
                   <Input
                     id="email"
                     name="email"
@@ -120,12 +124,12 @@ export default function Auth() {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="border-slate-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 h-12 rounded-xl"
                     placeholder="أدخل بريدك الإلكتروني"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-slate-700 font-medium">كلمة المرور</Label>
+                  <Label htmlFor="password" className="text-gray-700 font-semibold text-sm">كلمة المرور</Label>
                   <Input
                     id="password"
                     name="password"
@@ -133,13 +137,13 @@ export default function Auth() {
                     required
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="border-slate-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 h-12 rounded-xl"
                     placeholder="أدخل كلمة المرور"
                   />
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-2.5 shadow-lg hover:shadow-xl transition-all duration-200"
+                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 h-12 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                   disabled={loading}
                 >
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -148,34 +152,34 @@ export default function Auth() {
               </form>
             </TabsContent>
             
-            <TabsContent value="signup">
-              <form onSubmit={handleSignUp} className="space-y-4">
+            <TabsContent value="signup" className="mt-6">
+              <form onSubmit={handleSignUp} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="fullName" className="text-slate-700 font-medium">الاسم الكامل</Label>
+                  <Label htmlFor="fullName" className="text-gray-700 font-semibold text-sm">الاسم الكامل</Label>
                   <Input
                     id="fullName"
                     name="fullName"
                     required
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    className="border-slate-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 h-12 rounded-xl"
                     placeholder="أدخل اسمك الكامل"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="username" className="text-slate-700 font-medium">اسم المستخدم</Label>
+                  <Label htmlFor="username" className="text-gray-700 font-semibold text-sm">اسم المستخدم</Label>
                   <Input
                     id="username"
                     name="username"
                     required
                     value={formData.username}
                     onChange={handleInputChange}
-                    className="border-slate-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 h-12 rounded-xl"
                     placeholder="اختر اسم مستخدم"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-slate-700 font-medium">البريد الإلكتروني</Label>
+                  <Label htmlFor="email" className="text-gray-700 font-semibold text-sm">البريد الإلكتروني</Label>
                   <Input
                     id="email"
                     name="email"
@@ -183,12 +187,12 @@ export default function Auth() {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="border-slate-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 h-12 rounded-xl"
                     placeholder="أدخل بريدك الإلكتروني"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-slate-700 font-medium">كلمة المرور</Label>
+                  <Label htmlFor="password" className="text-gray-700 font-semibold text-sm">كلمة المرور</Label>
                   <Input
                     id="password"
                     name="password"
@@ -196,13 +200,13 @@ export default function Auth() {
                     required
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="border-slate-300 focus:border-blue-500 focus:ring-blue-500"
+                    className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 h-12 rounded-xl"
                     placeholder="اختر كلمة مرور قوية"
                   />
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-2.5 shadow-lg hover:shadow-xl transition-all duration-200"
+                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 h-12 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                   disabled={loading}
                 >
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -213,6 +217,7 @@ export default function Auth() {
           </Tabs>
         </CardContent>
       </Card>
+    </div>
     </div>
   );
 }
