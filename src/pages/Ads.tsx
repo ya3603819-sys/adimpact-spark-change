@@ -291,11 +291,11 @@ export default function Ads() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/30 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold gradient-text mb-4">استكشف الإعلانات</h1>
-          <p className="text-muted-foreground mb-6">
+          <h1 className="text-4xl font-bold gradient-text mb-4">🌟 استكشف الإعلانات</h1>
+          <p className="text-muted-foreground text-lg mb-6">
             اكتشف الإعلانات المؤثرة التي ينشرها مجتمعنا
           </p>
           
@@ -313,7 +313,7 @@ export default function Ads() {
 
         <div className="space-y-6">
           {filteredAds.map((ad) => (
-            <Card key={ad.id} className="overflow-hidden card-hover">
+            <Card key={ad.id} className="overflow-hidden card-hover tech-card">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>

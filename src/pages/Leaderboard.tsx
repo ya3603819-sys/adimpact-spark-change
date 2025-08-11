@@ -162,11 +162,11 @@ export default function Leaderboard() {
   const getRankIcon = (rank: number) => {
     switch (rank) {
       case 1:
-        return <Crown className="h-6 w-6 text-yellow-500" />;
+        return <Crown className="h-6 w-6 text-primary" />;
       case 2:
-        return <Medal className="h-6 w-6 text-gray-400" />;
+        return <Medal className="h-6 w-6 text-brand-secondary" />;
       case 3:
-        return <Award className="h-6 w-6 text-amber-600" />;
+        return <Award className="h-6 w-6 text-brand-accent" />;
       default:
         return <Trophy className="h-5 w-5 text-muted-foreground" />;
     }
@@ -175,13 +175,13 @@ export default function Leaderboard() {
   const getRankBadgeColor = (rank: number) => {
     switch (rank) {
       case 1:
-        return "bg-gradient-to-r from-yellow-400 to-yellow-600";
+        return "bg-gradient-to-r from-primary/90 to-primary text-primary-foreground";
       case 2:
-        return "bg-gradient-to-r from-gray-300 to-gray-500";
+        return "bg-gradient-to-r from-brand-secondary/90 to-brand-secondary text-white";
       case 3:
-        return "bg-gradient-to-r from-amber-400 to-amber-600";
+        return "bg-gradient-to-r from-brand-accent/90 to-brand-accent text-white";
       default:
-        return "bg-muted";
+        return "bg-muted text-muted-foreground";
     }
   };
 
@@ -203,10 +203,10 @@ export default function Leaderboard() {
   }) => (
     <div className="space-y-4">
       {ads.map((ad, index) => (
-        <Card key={ad.id} className={`relative overflow-hidden ${index < 3 ? 'ring-2 ring-brand-primary/20' : ''}`}>
+        <Card key={ad.id} className={`relative overflow-hidden card-hover tech-card ${index < 3 ? 'ring-2 ring-primary/30 shadow-lg' : ''}`}>
           <CardContent className="p-4">
             <div className="flex items-center space-x-4">
-              <div className={`flex items-center justify-center w-12 h-12 rounded-full ${getRankBadgeColor(index + 1)} text-white font-bold`}>
+              <div className={`flex items-center justify-center w-12 h-12 rounded-full ${getRankBadgeColor(index + 1)} font-bold shadow-lg`}>
                 {index < 3 ? getRankIcon(index + 1) : index + 1}
               </div>
               
@@ -217,17 +217,17 @@ export default function Leaderboard() {
                 </p>
                 
                 <div className="flex items-center space-x-4 mt-2">
-                  <div className="flex items-center space-x-1 text-brand-secondary">
+                  <div className="flex items-center space-x-1 text-brand-secondary bg-brand-secondary/10 px-2 py-1 rounded-full">
                     <Heart className="h-4 w-4" />
-                    <span className="text-sm">{ad.likes_count}</span>
+                    <span className="text-sm font-medium">{ad.likes_count}</span>
                   </div>
-                  <div className="flex items-center space-x-1 text-brand-accent">
+                  <div className="flex items-center space-x-1 text-brand-accent bg-brand-accent/10 px-2 py-1 rounded-full">
                     <MessageCircle className="h-4 w-4" />
-                    <span className="text-sm">{ad.comments_count}</span>
+                    <span className="text-sm font-medium">{ad.comments_count}</span>
                   </div>
-                  <div className="flex items-center space-x-1 text-brand-success">
+                  <div className="flex items-center space-x-1 text-brand-success bg-brand-success/10 px-2 py-1 rounded-full">
                     <Eye className="h-4 w-4" />
-                    <span className="text-sm">{ad.views_count}</span>
+                    <span className="text-sm font-medium">{ad.views_count}</span>
                   </div>
                 </div>
               </div>
@@ -250,30 +250,30 @@ export default function Leaderboard() {
   );
 
   return (
-    <div className="min-h-screen bg-muted/30 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold gradient-text mb-4">المتصدرون</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-4xl font-bold gradient-text mb-4">🏆 المتصدرون</h1>
+          <p className="text-muted-foreground text-lg">
             اكتشف أكثر الإعلانات والمبدعين تأثيراً في المجتمع
           </p>
         </div>
 
         <Tabs defaultValue="creators" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8">
-            <TabsTrigger value="creators" className="flex items-center space-x-2">
+          <TabsList className="grid w-full grid-cols-4 mb-8 glass-effect">
+            <TabsTrigger value="creators" className="flex items-center space-x-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
               <Trophy className="h-4 w-4" />
               <span>أفضل المبدعين</span>
             </TabsTrigger>
-            <TabsTrigger value="likes" className="flex items-center space-x-2">
+            <TabsTrigger value="likes" className="flex items-center space-x-2 data-[state=active]:bg-brand-secondary data-[state=active]:text-white">
               <Heart className="h-4 w-4" />
               <span>الأكثر إعجاباً</span>
             </TabsTrigger>
-            <TabsTrigger value="comments" className="flex items-center space-x-2">
+            <TabsTrigger value="comments" className="flex items-center space-x-2 data-[state=active]:bg-brand-accent data-[state=active]:text-white">
               <MessageCircle className="h-4 w-4" />
               <span>الأكثر تعليقاً</span>
             </TabsTrigger>
-            <TabsTrigger value="views" className="flex items-center space-x-2">
+            <TabsTrigger value="views" className="flex items-center space-x-2 data-[state=active]:bg-brand-success data-[state=active]:text-white">
               <Eye className="h-4 w-4" />
               <span>الأكثر مشاهدة</span>
             </TabsTrigger>

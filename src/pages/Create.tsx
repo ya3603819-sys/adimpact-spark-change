@@ -127,20 +127,20 @@ export default function Create() {
   };
 
   return (
-    <div className="min-h-screen bg-muted/30 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold gradient-text mb-4">إنشاء إعلان جديد</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-4xl font-bold gradient-text mb-4">✨ إنشاء إعلان جديد</h1>
+          <p className="text-muted-foreground text-lg">
             أنشئ إعلاناً مؤثراً لنشر رسالة إيجابية في المجتمع
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Form */}
-          <Card>
+          <Card className="tech-card">
             <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
+              <CardTitle className="flex items-center space-x-2 gradient-text">
                 <Type className="h-5 w-5" />
                 <span>محتوى الإعلان</span>
               </CardTitle>
@@ -256,9 +256,9 @@ export default function Create() {
           {/* Templates & Preview */}
           <div className="space-y-6">
             {/* Template Selection */}
-            <Card>
+            <Card className="tech-card">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
+                <CardTitle className="flex items-center space-x-2 gradient-text">
                   <Palette className="h-5 w-5" />
                   <span>اختر قالب التصميم</span>
                 </CardTitle>
@@ -287,9 +287,9 @@ export default function Create() {
             </Card>
 
             {/* Preview */}
-            <Card>
+            <Card className="tech-card">
               <CardHeader>
-                <CardTitle>معاينة الإعلان</CardTitle>
+                <CardTitle className="gradient-text">معاينة الإعلان</CardTitle>
                 <CardDescription>هكذا سيظهر إعلانك للمستخدمين</CardDescription>
               </CardHeader>
               <CardContent>
